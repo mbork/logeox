@@ -13,10 +13,10 @@
     tools:context="pl.mbork.logeox.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <ImageView
+    <pl.mbork.logeox.DrawingView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/canvas"
+        android:id="@+id/drawing_view"
         android:layout_weight="1" />
 
     <LinearLayout

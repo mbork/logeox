@@ -21,6 +21,8 @@ public class MainActivity extends Activity {
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 
+        DrawingView drawingView = (DrawingView)findViewById(R.id.drawing_view);
+        drawingView.invalidate();
     }
 
 
