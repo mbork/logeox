@@ -7,6 +7,7 @@ import android.view.View;
 
 public class MainActivity extends Activity {
 
+    final String TAG = "Main";
     private DrawingView drawingView;
 
     @Override
@@ -41,9 +42,9 @@ public class MainActivity extends Activity {
         public void onClick(View v) {
             TurtlePoint oldpos = new TurtlePoint(drawingView.turtle.getPosition());
             TurtlePoint newpos = new TurtlePoint(drawingView.turtle.goForward(100));
+            Log.d(TAG, "Adding line from" + oldpos + " to " + newpos);
             drawingView.addLine(new TurtleLine(oldpos, newpos));
             drawingView.invalidate();
         }
     };
 }
-
