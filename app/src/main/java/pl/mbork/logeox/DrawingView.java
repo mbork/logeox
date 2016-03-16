@@ -5,37 +5,47 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.widget.ImageView;
+import java.util.ArrayList;
 
-/**
- * Created by mbork on 10.03.16.
- */
 public class DrawingView extends ImageView {
 
     Paint paint = new Paint();
+    public Turtle turtle;
+    private ArrayList<TurtleLine> lines = new ArrayList<TurtleLine>();
+
+    Paint paint = new Paint(); // TODO: move to Turtle!
 
     public DrawingView(Context context) {
         super(context);
-//        paint.setColor(100);
-//        paint.setStrokeWidth(5);
+//        turtle = new Turtle(new TurtlePoint(getWidth()/2,getHeight()/2));
+        turtle = new Turtle(new TurtlePoint(600,900));
+        paint.setStrokeWidth(5); // TODO: move to Turtle!
+    }
+
+    public DrawingView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+//        turtle = new Turtle(new TurtlePoint(getWidth()/2,getHeight()/2));
+        turtle = new Turtle(new TurtlePoint(600,900));
+        paint.setStrokeWidth(5);
+    }
+
+    public DrawingView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+//        turtle = new Turtle(new TurtlePoint(getWidth()/2,getHeight()/2));
+        turtle = new Turtle(new TurtlePoint(600,900));
+        paint.setStrokeWidth(5);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawLine(0, getHeight(), getWidth(), 0, paint);
+        for (TurtleLine line: lines) {
+            canvas.drawLine((float)line.getStart().getX(), (float)line.getStart().getY(),
+                    (float)line.getEnd().getX(), (float)line.getEnd().getY(), paint);
+        }
     }
 
-//    public DrawingView(Context context, AttributeSet attrs) {
-//        super(context, attrs);
-//    }
-//
-//    public DrawingView(Context context, AttributeSet attrs, int defStyleAttr) {
-//        super(context, attrs, defStyleAttr);
-//    }
-
-    /*public DrawingView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-//        paint.setColor(100);
-        paint.setStrokeWidth(5);
-    }*/
+    public void addLine(TurtleLine turtleLine) {
+        lines.add(turtleLine);
+    }
 }
