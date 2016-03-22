@@ -17,30 +17,33 @@ public class DrawingView extends ImageView {
 
     Paint paint = new Paint(); // TODO: move to Turtle!
 
+    void initTurtle() {
+        turtle = new Turtle(-90);
+        final ImageView drawingView = this;
+        this.post(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        turtle.setPosition(new TurtlePoint(drawingView.getWidth()/2,drawingView.getHeight()/2));
+                    }
+                }
+        );
+        paint.setStrokeWidth(5); // TODO: move to Turtle!
+    }
+
     public DrawingView(Context context) {
         super(context);
-//        turtle = new Turtle(new TurtlePoint(getWidth()/2,getHeight()/2));
-        turtle = new Turtle(new TurtlePoint(600,900));
-        Log.d(TAG, "Initial position: (" + turtle.getPosition().getX() + "," + turtle.getPosition().getY() + ")");
-        paint.setStrokeWidth(5); // TODO: move to Turtle!
+        initTurtle();
     }
 
     public DrawingView(Context context, AttributeSet attrs) {
         super(context, attrs);
-//        turtle = new Turtle(new TurtlePoint(getWidth()/2,getHeight()/2));
-        turtle = new Turtle(new TurtlePoint(600,900));
-        Log.d(TAG, "Width: " + getWidth() + ", height: " + getHeight());
-        Log.d(TAG, "Initial position: (" + turtle.getPosition().getX() + "," + turtle.getPosition().getY() + ")");
-        paint.setStrokeWidth(5);
+        initTurtle();
     }
 
     public DrawingView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-//        turtle = new Turtle(new TurtlePoint(getWidth()/2,getHeight()/2));
-        turtle = new Turtle(new TurtlePoint(600,900));
-        Log.d(TAG, "Width: " + getWidth() + ", height: " + getHeight());
-        Log.d(TAG, "Initial position: (" + turtle.getPosition().getX() + "," + turtle.getPosition().getY() + ")");
-        paint.setStrokeWidth(5);
+        initTurtle();
     }
 
     @Override

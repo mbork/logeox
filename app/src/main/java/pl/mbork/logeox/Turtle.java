@@ -8,9 +8,17 @@ public class Turtle {
 
     final String TAG = "Turtle";
 
-    public Turtle(TurtlePoint position) {
+    public Turtle(TurtlePoint position, double dir) {
         this.position = position;
-        dir = -90;
+        this.dir = dir;
+    }
+
+    public Turtle(double dir) { // needed because the position will only be known later in DrawingView
+        this.dir = dir;
+    }
+
+    public void setPosition(TurtlePoint position) {
+        this.position = position;
     }
 
     public double getDir() {
