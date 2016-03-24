@@ -3,6 +3,7 @@ package pl.mbork.logeox;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.ImageView;
@@ -13,12 +14,12 @@ public class DrawingView extends ImageView {
     final String TAG = "DrawingView";
 
     public Turtle turtle;
-    private ArrayList<TurtleLine> lines = new ArrayList<TurtleLine>();
 
     Paint paint = new Paint(); // TODO: move to Turtle!
 
     void initTurtle() {
         turtle = new Turtle(-90);
+        paint.setStyle(Paint.Style.STROKE);
         final ImageView drawingView = this;
         this.post(
                 new Runnable() {
@@ -50,16 +51,9 @@ public class DrawingView extends ImageView {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         Log.d(TAG, "Redrawing...");
-        for (TurtleLine line: lines) {
-            Log.d(TAG, "Drawing line: " + line);
-            canvas.drawLine((float)line.getStart().getX(), (float)line.getStart().getY(),
-                    (float)line.getEnd().getX(), (float)line.getEnd().getY(), paint);
+        for (Path path: turtle.getPaths()) {
+            canvas.drawPath(path, paint);
         }
         Log.d(TAG, "Width: " + getWidth() + ", height: " + getHeight());
-    }
-
-    public void addLine(TurtleLine turtleLine) {
-        lines.add(turtleLine);
-        Log.d(TAG, "Number of lines: " + lines.size());
     }
 }
