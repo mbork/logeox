@@ -25,6 +25,7 @@ public class DrawingView extends ImageView {
         turtle = new Turtle(-90);
         turtleBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.turtle_triangle);
         paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeCap(Paint.Cap.ROUND);
         final ImageView drawingView = this;
         this.post(
                 new Runnable() {
