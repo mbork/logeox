@@ -27,6 +27,7 @@ public class MainActivity extends Activity {
         @Override
         public void onClick(View v) {
             drawingView.turtle.turnLeft(45);
+            drawingView.invalidate();
         }
     };
 
@@ -34,6 +35,7 @@ public class MainActivity extends Activity {
         @Override
         public void onClick(View v) {
             drawingView.turtle.turnRight(45);
+            drawingView.invalidate();
         }
     };
 

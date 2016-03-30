@@ -1,7 +1,10 @@
 package pl.mbork.logeox;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
@@ -14,11 +17,13 @@ public class DrawingView extends ImageView {
     final String TAG = "DrawingView";
 
     public Turtle turtle;
+    private Bitmap turtleBitmap;
 
     Paint paint = new Paint(); // TODO: move to Turtle!
 
     void initTurtle() {
         turtle = new Turtle(-90);
+        turtleBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.turtle_triangle);
         paint.setStyle(Paint.Style.STROKE);
         final ImageView drawingView = this;
         this.post(
@@ -54,6 +59,15 @@ public class DrawingView extends ImageView {
         for (Path path: turtle.getPaths()) {
             canvas.drawPath(path, paint);
         }
-        Log.d(TAG, "Width: " + getWidth() + ", height: " + getHeight());
+        Matrix turtleMatrix = new Matrix();
+        Log.d(TAG, "Position: " + turtle.getPosition());
+        turtleMatrix.setRotate((float) turtle.getDir() + 90);
+        if (turtle.getPosition() != null) {
+            turtleMatrix.postTranslate((float) turtle.getPosition().getX(),
+                    (float) turtle.getPosition().getY());
+            turtleMatrix.preTranslate(-turtleBitmap.getScaledWidth(canvas)/2,
+                    -turtleBitmap.getScaledHeight(canvas)/2);
+        }
+        canvas.drawBitmap(turtleBitmap, turtleMatrix, paint);
     }
 }
