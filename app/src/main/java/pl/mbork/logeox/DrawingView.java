@@ -64,10 +64,10 @@ public class DrawingView extends ImageView {
         Log.d(TAG, "Position: " + turtle.getPosition());
         turtleMatrix.setRotate((float) turtle.getDir() + 90);
         if (turtle.getPosition() != null) {
-            turtleMatrix.postTranslate((float) turtle.getPosition().getX(),
-                    (float) turtle.getPosition().getY());
             turtleMatrix.preTranslate(-turtleBitmap.getScaledWidth(canvas)/2,
                     -turtleBitmap.getScaledHeight(canvas)/2);
+            turtleMatrix.postTranslate((float) turtle.getPosition().getX(),
+                    (float) turtle.getPosition().getY());
         }
         canvas.drawBitmap(turtleBitmap, turtleMatrix, paint);
     }
