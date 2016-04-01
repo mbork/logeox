@@ -1,6 +1,5 @@
 package pl.mbork.logeox;
 
-import android.graphics.Path;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -10,27 +9,27 @@ public class Turtle {
     public TurtlePoint position;
     private double dir; // 0 means right
 
-    private List<Path> paths;
-    private Path currentPath;
+    private List<TurtlePath> paths;
+    private TurtlePath currentPath;
 
     final String TAG = "Turtle";
 
     public Turtle(TurtlePoint position, double dir) {
         this.position = position;
         this.dir = dir;
-        currentPath = new Path();
-        paths = new ArrayList<Path>();
+        currentPath = new TurtlePath();
+        paths = new ArrayList<TurtlePath>();
     }
 
     public Turtle(double dir) { // needed because the position will only be known later in DrawingView
         this.dir = dir;
-        currentPath = new Path();
-        paths = new ArrayList<Path>();
+        currentPath = new TurtlePath();
+        paths = new ArrayList<TurtlePath>();
     }
 
     public void setPosition(TurtlePoint position) {
         this.position = position;
-        currentPath.moveTo((float)position.getX(),(float)position.getY());
+        currentPath.getPath().moveTo((float)position.getX(),(float)position.getY());
     }
 
     public double getDir() {
@@ -41,8 +40,8 @@ public class Turtle {
         return position;
     }
 
-    public List<Path> getPaths() {
-        List<Path> paths = new ArrayList<Path>(this.paths);
+    public List<TurtlePath> getPaths() {
+        List<TurtlePath> paths = new ArrayList<TurtlePath>(this.paths);
         paths.add(currentPath);
         return paths;
     }
@@ -50,7 +49,7 @@ public class Turtle {
     public TurtlePoint goForward(double distance) {
         position.setX(position.getX() + distance * Math.cos(Math.toRadians(dir)));
         position.setY(position.getY() + distance * Math.sin(Math.toRadians(dir)));
-        currentPath.lineTo((float)position.getX(), (float)position.getY());
+        currentPath.getPath().lineTo((float)position.getX(), (float)position.getY());
         Log.d(TAG, "new position: (" + position.getX() + "," + position.getY() + ")");
         return position;
     }
