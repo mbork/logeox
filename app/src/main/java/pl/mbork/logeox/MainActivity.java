@@ -19,7 +19,6 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         drawingView = (DrawingView)findViewById(R.id.drawing_view);
-        drawingView.invalidate();
 
         findViewById(R.id.turn_left).setOnClickListener(buttonLeft_ocl);
         findViewById(R.id.turn_right).setOnClickListener(buttonRight_ocl);
