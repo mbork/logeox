@@ -22,11 +22,13 @@ public class DrawingView extends ImageView {
 
     public Turtle turtle;
     private Bitmap turtleBitmap;
-    public LightingColorFilter turtleColorFilter = turtlePenDownColorFilter; // init
+    private Paint turtlePaint = new Paint();
+    public LightingColorFilter turtleColorFilter;
 
     void initTurtle() {
         turtle = new Turtle(-90);
         turtleBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.turtle_triangle);
+        turtleColorFilter = turtlePenDownColorFilter;
         final ImageView drawingView = this;
         this.post(
                 new Runnable() {
@@ -69,7 +71,6 @@ public class DrawingView extends ImageView {
             turtleMatrix.postTranslate((float) turtle.getPosition().getX(),
                     (float) turtle.getPosition().getY());
         }
-        Paint turtlePaint = new Paint();
         turtlePaint.setColorFilter(turtleColorFilter);
         canvas.drawBitmap(turtleBitmap, turtleMatrix, turtlePaint);
     }
