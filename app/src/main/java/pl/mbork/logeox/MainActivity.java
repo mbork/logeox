@@ -24,6 +24,8 @@ public class MainActivity extends Activity {
         findViewById(R.id.turn_left).setOnClickListener(buttonLeft_ocl);
         findViewById(R.id.turn_right).setOnClickListener(buttonRight_ocl);
         findViewById(R.id.go_forward).setOnClickListener(buttonForward_ocl);
+        findViewById(R.id.pen_down).setOnClickListener(buttonPenDown_ocl);
+        findViewById(R.id.pen_up).setOnClickListener(buttonPenUp_ocl);
     }
 
     final View.OnClickListener buttonLeft_ocl = new View.OnClickListener() {
@@ -49,6 +51,20 @@ public class MainActivity extends Activity {
             TurtlePoint newpos = new TurtlePoint(drawingView.turtle.goForward(MOVEMENT_UNIT));
             Log.d(TAG, "Adding line from" + oldpos + " to " + newpos);
             drawingView.invalidate();
+        }
+    };
+
+    final View.OnClickListener buttonPenDown_ocl = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            drawingView.turtle.penDown();
+        }
+    };
+
+    final View.OnClickListener buttonPenUp_ocl = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            drawingView.turtle.penUp();
         }
     };
 }
