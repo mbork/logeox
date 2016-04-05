@@ -10,10 +10,11 @@ public class TurtlePath {
     private Path path;
     private Paint paint;
 
+    final float DEFAULT_STROKE_WIDTH = 6; // TODO: see http://stackoverflow.com/a/26877300/1181665 to measure it in dp.
+
     public TurtlePath() {
         this.path = new Path();
         this.paint = new Paint();
-        this.paint.setStrokeWidth(6);
         this.paint.setStyle(Paint.Style.STROKE);
         this.paint.setStrokeJoin(Paint.Join.ROUND);
         this.paint.setStrokeCap(Paint.Cap.ROUND);
@@ -21,10 +22,10 @@ public class TurtlePath {
 
     public TurtlePath(Path path) {
         this.path = path;
-        this.paint.setStrokeWidth(10);
         this.paint.setStyle(Paint.Style.STROKE);
         this.paint.setStrokeJoin(Paint.Join.ROUND);
         this.paint.setStrokeCap(Paint.Cap.ROUND);
+        this.paint.setStrokeWidth(DEFAULT_STROKE_WIDTH);
     }
 
     public TurtlePath(Path path, Paint paint) {
