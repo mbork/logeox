@@ -10,8 +10,8 @@ public class MainActivity extends Activity {
     final String TAG = "Main";
     private DrawingView drawingView;
 
-    final double ROTATION_UNIT = 30;
-    final double MOVEMENT_UNIT = 50;
+    final float ROTATION_UNIT = 30;
+    final float MOVEMENT_UNIT = 50;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Turtle {
     public TurtlePoint position;
-    private double dir; // 0 means right
+    private float dir; // 0 means right
     private Boolean penIsDown;
 
     private List<TurtlePath> paths;
@@ -15,15 +15,15 @@ public class Turtle {
 
     final String TAG = "Turtle";
 
-    public Turtle(TurtlePoint position, double dir) {
         this.position = position;
         this.dir = dir;
         this.penIsDown = true;
         currentPath = new TurtlePath();
         paths = new ArrayList<TurtlePath>();
+    public Turtle(float dir) { // needed because the position will only be known later in DrawingView
     }
 
-    public Turtle(double dir) { // needed because the position will only be known later in DrawingView
+    public Turtle(TurtlePoint position, float dir) {
         this.dir = dir;
         this.penIsDown = true;
         currentPath = new TurtlePath();
@@ -50,26 +50,26 @@ public class Turtle {
         return paths;
     }
 
-    public TurtlePoint goForward(double distance) {
-        position.setX(position.getX() + distance * Math.cos(Math.toRadians(dir)));
-        position.setY(position.getY() + distance * Math.sin(Math.toRadians(dir)));
+    public TurtlePoint goForward(float distance) {
+        position.setX(position.getX() + distance * (float)Math.cos(Math.toRadians(dir)));
+        position.setY(position.getY() + distance * (float)Math.sin(Math.toRadians(dir)));
         if(penIsDown) {
-            currentPath.getPath().lineTo((float) position.getX(), (float) position.getY());
+            currentPath.getPath().lineTo(position.getX(), position.getY());
         } else {
-            currentPath.getPath().moveTo((float) position.getX(), (float) position.getY());
+            currentPath.getPath().moveTo(position.getX(), position.getY());
         }
         Log.d(TAG, "new position: (" + position.getX() + "," + position.getY() + ")");
         return position;
     }
 
-    public void turnLeft(double angle) {
+    public void turnLeft(float angle) {
         dir -= angle;
         Log.d(TAG, "new angle: " + dir);
     }
 
-    public void turnRight(double angle) {
         dir += angle;
         Log.d(TAG, "new angle: " + dir);
+    public void turnRight(float angle) {
     }
 
     public void penDown() {

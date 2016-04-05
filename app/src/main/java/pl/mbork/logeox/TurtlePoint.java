@@ -1,9 +1,9 @@
 package pl.mbork.logeox;
 
 public class TurtlePoint {
-    private double x, y;
+    private float x, y;
 
-    public TurtlePoint(double x, double y) {
+    public TurtlePoint(float x, float y) {
         this.x = x;
         this.y = y;
     }
@@ -13,19 +13,19 @@ public class TurtlePoint {
         this.y = tp.getY();
     }
 
-    public double getX() {
+    public float getX() {
         return x;
     }
 
-    public void setX(double x) {
+    public void setX(float x) {
         this.x = x;
     }
 
-    public double getY() {
+    public float getY() {
         return y;
     }
 
-    public void setY(double y) {
+    public void setY(float y) {
         this.y = y;
     }
 
