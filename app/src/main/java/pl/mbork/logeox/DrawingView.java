@@ -55,6 +55,26 @@ public class DrawingView extends ImageView {
         initTurtle();
     }
 
+    private Boolean turtleOutOfBounds() {
+        if ((turtle.getPosition().getX() < 0)
+            || (turtle.getPosition().getX() > this.getWidth())
+            || (turtle.getPosition().getY() < 0)
+            || (turtle.getPosition().getY() > this.getHeight()))
+            return true;
+        return false;
+    }
+
+    private TurtlePoint projectTurtlePosition() {
+        TurtlePoint projectedPosition = new TurtlePoint(turtle.getPosition());
+        if (projectedPosition.getX() < 0) { projectedPosition.setX(0); }
+        if (projectedPosition.getX() > this.getWidth()) { projectedPosition.setX(this.getWidth()); }
+
+        if (projectedPosition.getY() < 0) { projectedPosition.setY(0); }
+        if (projectedPosition.getY() > this.getHeight()) { projectedPosition.setY(this.getHeight()); }
+
+        return projectedPosition;
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -64,12 +84,17 @@ public class DrawingView extends ImageView {
         }
         Matrix turtleMatrix = new Matrix();
         Log.d(TAG, "Position: " + turtle.getPosition());
-        turtleMatrix.setRotate((float) turtle.getDir() + 90);
+        if (turtleOutOfBounds()) {
+            Log.d(TAG, "Turtle out of bounds!");
+            turtleMatrix.preScale(0.5f, 0.5f);
+        }
+        TurtlePoint projectedPosition = this.projectTurtlePosition();
+        turtleMatrix.postRotate((float) turtle.getDir() + 90);
         if (turtle.getPosition() != null) {
             turtleMatrix.preTranslate(-turtleBitmap.getScaledWidth(canvas) / 2,
                     -turtleBitmap.getScaledHeight(canvas) / 2);
-            turtleMatrix.postTranslate((float) turtle.getPosition().getX(),
-                    (float) turtle.getPosition().getY());
+            turtleMatrix.postTranslate(projectedPosition.getX(),
+                    projectedPosition.getY());
         }
         turtlePaint.setColorFilter(turtleColorFilter);
         canvas.drawBitmap(turtleBitmap, turtleMatrix, turtlePaint);
