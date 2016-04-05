@@ -4,7 +4,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 
 /**
- * Created by mbork on 01.04.16.
+ * A TurtlePath is a pair of a Path and a Paint.
  */
 public class TurtlePath {
     private Path path;

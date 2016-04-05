@@ -5,6 +5,11 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A Turtle can turn, go forward and draw or not.  It also remembers the path it went.
+ * Currently, there is only one such path; when changing the line color/style is implemented,
+ * more will be needed.
+ */
 public class Turtle {
     public TurtlePoint position;
     private float dir; // 0 means right
