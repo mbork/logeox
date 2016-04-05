@@ -33,7 +33,7 @@ public class Turtle {
 
     public void setPosition(TurtlePoint position) {
         this.position = position;
-        currentPath.getPath().moveTo(position.getX(), position.getY());
+        currentPath.moveTo(position);
     }
 
     public double getDir() {
@@ -54,9 +54,9 @@ public class Turtle {
         position.setX(position.getX() + distance * (float)Math.cos(Math.toRadians(dir)));
         position.setY(position.getY() + distance * (float)Math.sin(Math.toRadians(dir)));
         if(penIsDown) {
-            currentPath.getPath().lineTo(position.getX(), position.getY());
+            currentPath.lineTo(position);
         } else {
-            currentPath.getPath().moveTo(position.getX(), position.getY());
+            currentPath.moveTo(position);
         }
         Log.d(TAG, "new position: (" + position.getX() + "," + position.getY() + ")");
         return position;

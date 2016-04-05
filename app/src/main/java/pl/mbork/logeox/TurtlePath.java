@@ -44,4 +44,12 @@ public class TurtlePath {
     public void setPath(Path path) {
         this.path = path;
     }
+
+    public void moveTo(TurtlePoint position) {
+        path.moveTo(position.getX(), position.getY());
+    }
+
+    public void lineTo(TurtlePoint position) {
+        path.lineTo(position.getX(), position.getY());
+    }
 }
