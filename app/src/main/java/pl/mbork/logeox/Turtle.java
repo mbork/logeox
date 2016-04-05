@@ -11,24 +11,20 @@ import java.util.List;
  * more will be needed.
  */
 public class Turtle {
-    public TurtlePoint position;
+    private TurtlePoint position;
     private float dir; // 0 means right
     private Boolean penIsDown;
-
     private List<TurtlePath> paths;
     private TurtlePath currentPath;
 
     final String TAG = "Turtle";
 
-        this.position = position;
-        this.dir = dir;
-        this.penIsDown = true;
-        currentPath = new TurtlePath();
-        paths = new ArrayList<TurtlePath>();
     public Turtle(float dir) { // needed because the position will only be known later in DrawingView
+        this(new TurtlePoint(0, 0), dir);
     }
 
     public Turtle(TurtlePoint position, float dir) {
+        this.position = position;
         this.dir = dir;
         this.penIsDown = true;
         currentPath = new TurtlePath();
