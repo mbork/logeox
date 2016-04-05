@@ -37,7 +37,6 @@ public class Turtle {
 
     public void setPosition(TurtlePoint position) {
         this.position = position;
-        this.penIsDown = true;
         currentPath.getPath().moveTo(position.getX(), position.getY());
     }
 
