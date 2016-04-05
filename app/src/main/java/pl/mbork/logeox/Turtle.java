@@ -67,9 +67,8 @@ public class Turtle {
         Log.d(TAG, "new angle: " + dir);
     }
 
-        dir += angle;
-        Log.d(TAG, "new angle: " + dir);
     public void turnRight(float angle) {
+        turnLeft(-angle);
     }
 
     public void penDown() {
