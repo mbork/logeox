@@ -30,7 +30,7 @@ public class MainActivity extends Activity {
     final View.OnClickListener buttonLeft_ocl = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            drawingView.turtle.turnLeft(ROTATION_UNIT);
+            drawingView.getTurtle().turnLeft(ROTATION_UNIT);
             drawingView.invalidate();
         }
     };
@@ -38,7 +38,7 @@ public class MainActivity extends Activity {
     final View.OnClickListener buttonRight_ocl = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            drawingView.turtle.turnRight(ROTATION_UNIT);
+            drawingView.getTurtle().turnRight(ROTATION_UNIT);
             drawingView.invalidate();
         }
     };
@@ -46,8 +46,8 @@ public class MainActivity extends Activity {
     final View.OnClickListener buttonForward_ocl = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            TurtlePoint oldpos = new TurtlePoint(drawingView.turtle.getPosition());
-            TurtlePoint newpos = new TurtlePoint(drawingView.turtle.goForward(MOVEMENT_UNIT));
+            TurtlePoint oldpos = new TurtlePoint(drawingView.getTurtle().getPosition());
+            TurtlePoint newpos = new TurtlePoint(drawingView.getTurtle().goForward(MOVEMENT_UNIT));
             Log.d(TAG, "Adding line from" + oldpos + " to " + newpos);
             drawingView.invalidate();
         }
@@ -56,7 +56,7 @@ public class MainActivity extends Activity {
     final View.OnClickListener buttonPenDown_ocl = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            drawingView.turtle.penDown();
+            drawingView.getTurtle().penDown();
             drawingView.invalidate();
         }
     };
@@ -64,7 +64,7 @@ public class MainActivity extends Activity {
     final View.OnClickListener buttonPenUp_ocl = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            drawingView.turtle.penUp();
+            drawingView.getTurtle().penUp();
             drawingView.invalidate();
         }
     };

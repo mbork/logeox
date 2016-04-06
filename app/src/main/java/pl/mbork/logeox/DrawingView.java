@@ -16,7 +16,7 @@ public class DrawingView extends ImageView {
 
     final String TAG = "DrawingView";
 
-    public Turtle turtle;
+    private Turtle turtle;
     private Bitmap turtleBitmap;
     private Paint turtlePaint = new Paint();
 
@@ -47,6 +47,10 @@ public class DrawingView extends ImageView {
     public DrawingView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initTurtle();
+    }
+
+    public Turtle getTurtle() {
+        return turtle;
     }
 
     private Boolean turtleOutOfBounds() {
