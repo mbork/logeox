@@ -6,11 +6,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.ImageView;
-import java.util.ArrayList;
 
 public class DrawingView extends ImageView {
 
@@ -64,6 +62,7 @@ public class DrawingView extends ImageView {
 
     private TurtlePoint projectTurtlePosition() {
         TurtlePoint projectedPosition = new TurtlePoint(turtle.getPosition());
+
         if (projectedPosition.getX() < 0) { projectedPosition.setX(0); }
         if (projectedPosition.getX() > this.getWidth()) { projectedPosition.setX(this.getWidth()); }
 
