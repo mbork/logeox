@@ -52,12 +52,10 @@ public class DrawingView extends ImageView {
     }
 
     private Boolean turtleOutOfBounds() {
-        if ((turtle.getPosition().getX() < 0)
+        return ((turtle.getPosition().getX() < 0)
             || (turtle.getPosition().getX() > this.getWidth())
             || (turtle.getPosition().getY() < 0)
-            || (turtle.getPosition().getY() > this.getHeight()))
-            return true;
-        return false;
+            || (turtle.getPosition().getY() > this.getHeight()));
     }
 
     private TurtlePoint projectTurtlePosition() {
