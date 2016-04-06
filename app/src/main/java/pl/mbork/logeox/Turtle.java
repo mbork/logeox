@@ -1,7 +1,7 @@
 package pl.mbork.logeox;
 
+import android.graphics.LightingColorFilter;
 import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +16,9 @@ public class Turtle {
     private Boolean penIsDown;
     private List<TurtlePath> paths;
     private TurtlePath currentPath;
+
+    final LightingColorFilter TURTLE_PEN_DOWN_COLOR_FILTER = new LightingColorFilter(0xFFFFFFFF, 0x00888888);
+    final LightingColorFilter TURTLE_PEN_UP_COLOR_FILTER = new LightingColorFilter(0xFFFFFFFF, 0x00DDDDDD);
 
     final String TAG = "Turtle";
 
@@ -42,6 +45,14 @@ public class Turtle {
 
     public TurtlePoint getPosition() {
         return position;
+    }
+
+    public LightingColorFilter getTurtleColorFilter() {
+        if (penIsDown) {
+            return TURTLE_PEN_DOWN_COLOR_FILTER;
+        } else {
+            return TURTLE_PEN_UP_COLOR_FILTER;
+        }
     }
 
     public List<TurtlePath> getPaths() {

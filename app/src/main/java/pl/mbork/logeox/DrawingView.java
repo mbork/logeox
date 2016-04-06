@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.LightingColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -17,18 +16,13 @@ public class DrawingView extends ImageView {
 
     final String TAG = "DrawingView";
 
-    final LightingColorFilter turtlePenDownColorFilter = new LightingColorFilter(0xFFFFFFFF, 0x00888888);
-    final LightingColorFilter turtlePenUpColorFilter = new LightingColorFilter(0xFFFFFFFF, 0x00DDDDDD);
-
     public Turtle turtle;
     private Bitmap turtleBitmap;
     private Paint turtlePaint = new Paint();
-    public LightingColorFilter turtleColorFilter;
 
     void initTurtle() {
         turtle = new Turtle(-90);
         turtleBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.turtle_triangle);
-        turtleColorFilter = turtlePenDownColorFilter;
         final ImageView drawingView = this;
         this.post(
                 new Runnable() {
@@ -96,7 +90,7 @@ public class DrawingView extends ImageView {
             turtleMatrix.postTranslate(projectedPosition.getX(),
                     projectedPosition.getY());
         }
-        turtlePaint.setColorFilter(turtleColorFilter);
+        turtlePaint.setColorFilter(turtle.getTurtleColorFilter());
         canvas.drawBitmap(turtleBitmap, turtleMatrix, turtlePaint);
     }
 }

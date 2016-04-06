@@ -57,7 +57,6 @@ public class MainActivity extends Activity {
         @Override
         public void onClick(View v) {
             drawingView.turtle.penDown();
-            drawingView.turtleColorFilter = drawingView.turtlePenDownColorFilter;
             drawingView.invalidate();
         }
     };
@@ -66,7 +65,6 @@ public class MainActivity extends Activity {
         @Override
         public void onClick(View v) {
             drawingView.turtle.penUp();
-            drawingView.turtleColorFilter = drawingView.turtlePenUpColorFilter;
             drawingView.invalidate();
         }
     };
