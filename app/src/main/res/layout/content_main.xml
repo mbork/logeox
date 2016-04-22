@@ -47,34 +47,38 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <Button
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/pen_up"
+            android:adjustViewBounds="true"
+            android:padding="10dp"
             android:id="@+id/pen_up"
-            android:layout_alignParentEnd="false"
-            android:layout_alignParentStart="false"
-            android:layout_alignParentLeft="true"
-            android:layout_weight="2" />
+            android:src="@drawable/pen_up"
+            android:layout_toStartOf="@+id/pen_switch" />
 
-        <Space
-            android:layout_width="20px"
-            android:layout_height="20px"
-            android:layout_weight="1" />
-
-        <Button
+        <Switch
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/pen_down"
-            android:id="@+id/pen_down"
-            android:layout_alignParentRight="true"
-            android:layout_weight="2" />
+            android:id="@id/pen_switch"
+            android:textOn=""
+            android:textOff=""
+            android:checked="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_centerInParent="true" />
 
-    </LinearLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:padding="10dp"
+            android:id="@+id/pen_down"
+            android:src="@drawable/pen_down"
+            android:layout_toRightOf="@id/pen_switch"/>
+    </RelativeLayout>
 
 </LinearLayout>

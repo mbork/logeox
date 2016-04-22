@@ -4,11 +4,14 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
 public class MainActivity extends Activity {
 
     final String TAG = "Main";
     private DrawingView drawingView;
+    private Switch penSwitch;
 
     final float ROTATION_UNIT = 30;
     final float MOVEMENT_UNIT = 50;
@@ -19,10 +22,23 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         drawingView = (DrawingView)findViewById(R.id.drawing_view);
+        penSwitch = (Switch)findViewById(R.id.pen_switch);
 
         findViewById(R.id.turn_left).setOnClickListener(buttonLeft_ocl);
         findViewById(R.id.turn_right).setOnClickListener(buttonRight_ocl);
         findViewById(R.id.go_forward).setOnClickListener(buttonForward_ocl);
+        penSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    drawingView.getTurtle().penDown();
+                } else {
+                    drawingView.getTurtle().penUp();
+                }
+                drawingView.invalidate();
+            }
+        });
+
         findViewById(R.id.pen_down).setOnClickListener(buttonPenDown_ocl);
         findViewById(R.id.pen_up).setOnClickListener(buttonPenUp_ocl);
     }
@@ -56,16 +72,14 @@ public class MainActivity extends Activity {
     final View.OnClickListener buttonPenDown_ocl = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            drawingView.getTurtle().penDown();
-            drawingView.invalidate();
+            penSwitch.setChecked(true);
         }
     };
 
     final View.OnClickListener buttonPenUp_ocl = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            drawingView.getTurtle().penUp();
-            drawingView.invalidate();
+            penSwitch.setChecked(false);
         }
     };
 }
