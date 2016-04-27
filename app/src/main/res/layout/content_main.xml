@@ -60,35 +60,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
+        <ImageButton
             android:layout_height="64dp"
             android:layout_width="48dp"
             android:layout_weight="1"
             android:scaleType="fitCenter"
             android:adjustViewBounds="true"
-            android:padding="10dp"
             android:id="@+id/pen_up"
             android:src="@drawable/pen_up"
             android:layout_toStartOf="@+id/pen_switch" />
 
-        <Switch
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@id/pen_switch"
-            android:textOn=""
-            android:textOff=""
-            android:checked="true"
-            android:layout_gravity="center_horizontal"
-            android:layout_centerInParent="true" />
+        <RelativeLayout
+            android:layout_width="48dp"
+            android:layout_height="64dp"
+            android:layout_weight="2">
+            <Switch
+                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:id="@id/pen_switch"
+                android:textOn=""
+                android:textOff=""
+                android:checked="true"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageButton
+            android:layout_height="64dp"
+            android:layout_width="48dp"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
             android:adjustViewBounds="true"
-            android:padding="10dp"
             android:id="@+id/pen_down"
             android:src="@drawable/pen_down"
             android:layout_toRightOf="@id/pen_switch"/>
-    </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>
