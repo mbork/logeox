@@ -89,4 +89,10 @@ public class Turtle {
     public void penUp() {
         penIsDown = false;
     }
+
+    public void clearTurtlePaths() {
+        paths.clear();
+        currentPath = new TurtlePath();
+        currentPath.moveTo(position);
+    };
 }
