@@ -3,6 +3,9 @@ package pl.mbork.logeox;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
@@ -41,6 +44,28 @@ public class MainActivity extends Activity {
 
         findViewById(R.id.pen_down).setOnClickListener(buttonPenDown_ocl);
         findViewById(R.id.pen_up).setOnClickListener(buttonPenUp_ocl);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_clear_screen:
+                Log.d(TAG, "Clear screen!");
+                drawingView.getTurtle().clearTurtlePaths();
+                drawingView.invalidate();
+                return true;
+            case R.id.action_settings:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     final View.OnClickListener buttonLeft_ocl = new View.OnClickListener() {
