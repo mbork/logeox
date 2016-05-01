@@ -88,7 +88,8 @@ public class MainActivity extends Activity {
         @Override
         public void onClick(View v) {
             TurtlePoint oldpos = new TurtlePoint(drawingView.getTurtle().getPosition());
-            TurtlePoint newpos = new TurtlePoint(drawingView.getTurtle().goForward(MOVEMENT_UNIT));
+            drawingView.getTurtle().goForward(MOVEMENT_UNIT);
+            TurtlePoint newpos = new TurtlePoint(drawingView.getTurtle().getPosition());
             Log.d(TAG, "Adding line from" + oldpos + " to " + newpos);
             drawingView.invalidate();
         }

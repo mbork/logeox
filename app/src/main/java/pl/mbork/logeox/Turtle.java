@@ -61,7 +61,7 @@ public class Turtle {
         return paths;
     }
 
-    public TurtlePoint goForward(float distance) {
+    public void goForward(float distance) {
         position.setX(position.getX() + distance * (float)Math.cos(Math.toRadians(dir)));
         position.setY(position.getY() + distance * (float)Math.sin(Math.toRadians(dir)));
         if(penIsDown) {
@@ -70,7 +70,6 @@ public class Turtle {
             currentPath.moveTo(position);
         }
         Log.d(TAG, "new position: (" + position.getX() + "," + position.getY() + ")");
-        return position;
     }
 
     public void turnLeft(float angle) {
