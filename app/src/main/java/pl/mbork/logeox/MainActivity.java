@@ -1,7 +1,7 @@
 package pl.mbork.logeox;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
     final String TAG = "Main";
     private DrawingView drawingView;
