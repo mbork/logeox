@@ -61,6 +61,11 @@ public class MainActivity extends AppCompatActivity {
                 drawingView.getTurtle().clearTurtlePaths();
                 drawingView.invalidate();
                 return true;
+            case R.id.action_undo:
+                Log.d(TAG, "Undo!");
+                drawingView.getTurtle().Undo();
+                drawingView.invalidate();
+                return true;
             case R.id.action_settings:
                 return true;
             default:

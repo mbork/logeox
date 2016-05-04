@@ -170,4 +170,19 @@ public class Turtle {
         currentPath = new TurtlePath();
         currentPath.moveTo(position);
     };
+
+    public void replayCommands() {
+        clearTurtlePaths();
+        this.penIsDown = true; // TODO: remove magic!
+        goHome();
+        for (TurtleCommand cmd: commands) {
+            cmd.Execute();
+        }
+    }
+
+    public void Undo() {
+        Log.d(TAG, "Undo");
+        commands.pollLast();
+        replayCommands();
+    }
 }

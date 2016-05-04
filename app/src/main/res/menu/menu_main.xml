@@ -13,4 +13,8 @@
         android:title="Clear"
         app:showAsAction="always"
         />
+    <item
+        android:id="@+id/action_undo"
+        android:title="Undo"
+        />
 </menu>
