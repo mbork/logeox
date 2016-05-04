@@ -30,6 +30,7 @@ public class Turtle {
             this.arg = arg;
         };
         abstract void Execute();
+        abstract public boolean undoable();
     }
 
     private class GoForward extends TurtleCommand {
@@ -47,6 +48,7 @@ public class Turtle {
             }
             Log.d(TAG, "new position: (" + position.getX() + "," + position.getY() + ")");
         }
+        public boolean undoable() { return true; }
     }
 
     private class TurnLeft extends TurtleCommand {
@@ -56,6 +58,7 @@ public class Turtle {
             dir -= arg;
             Log.d(TAG, "new angle: " + dir);
         }
+        public boolean undoable() { return false; }
     }
 
     private class TurnRight extends TurtleCommand {
@@ -65,6 +68,7 @@ public class Turtle {
             dir += arg;
             Log.d(TAG, "new angle: " + dir);
         }
+        public boolean undoable() { return false; }
     }
 
     private class PenDown extends TurtleCommand {
@@ -72,6 +76,7 @@ public class Turtle {
         void Execute() {
             penIsDown = true;
         }
+        public boolean undoable() { return false; }
     }
 
     private class PenUp extends TurtleCommand {
@@ -79,6 +84,7 @@ public class Turtle {
         void Execute() {
             penIsDown = false;
         }
+        public boolean undoable() { return false; }
     }
 
     public Turtle(float dir) { // needed because the position will only be known later in DrawingView
@@ -181,8 +187,12 @@ public class Turtle {
     }
 
     public void Undo() {
+        TurtleCommand lastCmd;
+
         Log.d(TAG, "Undo");
-        commands.pollLast();
+        do {
+            lastCmd = commands.pollLast();
+        } while ((lastCmd != null) && !(lastCmd.undoable()));
         replayCommands();
     }
 }
