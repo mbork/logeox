@@ -2,6 +2,7 @@ package pl.mbork.logeox;
 
 import android.graphics.LightingColorFilter;
 import android.util.Log;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,7 @@ public class Turtle {
     private TurtlePoint startPosition, position;
     private float dir; // 0 means right
     private Boolean penIsDown;
+    private ArrayDeque<TurtleCommand> commands;
     private List<TurtlePath> paths;
     private TurtlePath currentPath;
 
@@ -21,6 +23,63 @@ public class Turtle {
     final LightingColorFilter TURTLE_PEN_UP_COLOR_FILTER = new LightingColorFilter(0xFFFFFFFF, 0x00DDDDDD);
 
     final String TAG = "Turtle";
+
+    private abstract class TurtleCommand {
+        float arg;
+        public TurtleCommand(float arg) {
+            this.arg = arg;
+        };
+        abstract void Execute();
+    }
+
+    private class GoForward extends TurtleCommand {
+        public GoForward(float distance) {
+            super(distance);
+        }
+        void Execute() {
+            Log.d(TAG, "GoForward.Execute");
+            position.setX(position.getX() + arg * (float)Math.cos(Math.toRadians(dir)));
+            position.setY(position.getY() + arg * (float)Math.sin(Math.toRadians(dir)));
+            if(penIsDown) {
+                currentPath.lineTo(position);
+            } else {
+                currentPath.moveTo(position);
+            }
+            Log.d(TAG, "new position: (" + position.getX() + "," + position.getY() + ")");
+        }
+    }
+
+    private class TurnLeft extends TurtleCommand {
+        public TurnLeft(float angle) { super(angle); }
+        void Execute() {
+            Log.d(TAG, "TurnLeft.Execute");
+            dir -= arg;
+            Log.d(TAG, "new angle: " + dir);
+        }
+    }
+
+    private class TurnRight extends TurtleCommand {
+        public TurnRight(float angle) { super(angle); }
+        void Execute() {
+            Log.d(TAG, "TurnRight.Execute");
+            dir += arg;
+            Log.d(TAG, "new angle: " + dir);
+        }
+    }
+
+    private class PenDown extends TurtleCommand {
+        public PenDown(float arg) { super(arg); }
+        void Execute() {
+            penIsDown = true;
+        }
+    }
+
+    private class PenUp extends TurtleCommand {
+        public PenUp(float arg) { super(arg); }
+        void Execute() {
+            penIsDown = false;
+        }
+    }
 
     public Turtle(float dir) { // needed because the position will only be known later in DrawingView
         this(new TurtlePoint(0, 0), dir);
@@ -33,6 +92,7 @@ public class Turtle {
         this.penIsDown = true;
         currentPath = new TurtlePath();
         paths = new ArrayList<TurtlePath>();
+        commands = new ArrayDeque<>();
     }
 
     public void setStartPosition(TurtlePoint startPosition) {
@@ -73,31 +133,36 @@ public class Turtle {
     }
 
     public void goForward(float distance) {
-        position.setX(position.getX() + distance * (float)Math.cos(Math.toRadians(dir)));
-        position.setY(position.getY() + distance * (float)Math.sin(Math.toRadians(dir)));
-        if(penIsDown) {
-            currentPath.lineTo(position);
-        } else {
-            currentPath.moveTo(position);
-        }
-        Log.d(TAG, "new position: (" + position.getX() + "," + position.getY() + ")");
+        Log.d(TAG, "goForward");
+        TurtleCommand cmd = new GoForward(distance);
+        cmd.Execute();
+        commands.addLast(cmd);
     }
 
     public void turnLeft(float angle) {
-        dir -= angle;
-        Log.d(TAG, "new angle: " + dir);
+        Log.d(TAG, "turnLeft");
+        TurtleCommand cmd = new TurnLeft(angle);
+        cmd.Execute();
+        commands.addLast(cmd);
     }
 
     public void turnRight(float angle) {
-        turnLeft(-angle);
+        Log.d(TAG, "turnRight");
+        TurtleCommand cmd = new TurnRight(angle);
+        cmd.Execute();
+        commands.addLast(cmd);
     }
 
     public void penDown() {
-        penIsDown = true;
+        TurtleCommand cmd = new PenDown(0);
+        cmd.Execute();
+        commands.addLast(cmd);
     }
 
     public void penUp() {
-        penIsDown = false;
+        TurtleCommand cmd = new PenUp(0);
+        cmd.Execute();
+        commands.addLast(cmd);
     }
 
     public void clearTurtlePaths() {
