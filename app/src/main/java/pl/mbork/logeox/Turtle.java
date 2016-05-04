@@ -11,7 +11,7 @@ import java.util.List;
  * more will be needed.
  */
 public class Turtle {
-    private TurtlePoint position;
+    private TurtlePoint startPosition, position;
     private float dir; // 0 means right
     private Boolean penIsDown;
     private List<TurtlePath> paths;
@@ -26,17 +26,28 @@ public class Turtle {
         this(new TurtlePoint(0, 0), dir);
     }
 
-    public Turtle(TurtlePoint position, float dir) {
-        this.position = position;
+    public Turtle(TurtlePoint startPosition, float dir) {
+        this.startPosition = new TurtlePoint(startPosition);
+        this.position = new TurtlePoint(startPosition);
         this.dir = dir;
         this.penIsDown = true;
         currentPath = new TurtlePath();
         paths = new ArrayList<TurtlePath>();
     }
 
+    public void setStartPosition(TurtlePoint startPosition) {
+        this.startPosition = new TurtlePoint(startPosition);
+    }
+
     public void setPosition(TurtlePoint position) {
-        this.position = position;
+        this.position = new TurtlePoint(position);
         currentPath.moveTo(position);
+    }
+
+    public void goHome() {
+        Log.d(TAG, "Going home: " + this.startPosition);
+        this.setPosition(this.startPosition);
+        this.dir = -90; // TODO: magic constant!!!
     }
 
     public double getDir() {

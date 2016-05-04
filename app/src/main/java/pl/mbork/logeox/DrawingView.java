@@ -26,7 +26,8 @@ public class DrawingView extends ImageView {
                 new Runnable() {
                     @Override
                     public void run() {
-                        turtle.setPosition(new TurtlePoint(drawingView.getWidth() / 2, drawingView.getHeight() / 2));
+                        turtle.setStartPosition(new TurtlePoint(drawingView.getWidth() / 2, drawingView.getHeight() / 2));
+                        turtle.goHome();  // This is suboptimal, since it adds a moveTo op to the path...
                     }
                 }
         );
