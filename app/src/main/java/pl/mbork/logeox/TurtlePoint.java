@@ -25,9 +25,7 @@ public class TurtlePoint {
         return y;
     }
 
-    public void setY(float y) {
-        this.y = y;
-    }
+    public void setY(float y) { this.y = y; }
 
     @Override
     public String toString() {
