@@ -26,16 +26,20 @@ public class Turtle {
 
     private abstract class TurtleCommand {
         float arg;
+	    boolean undoable;
         public TurtleCommand(float arg) {
             this.arg = arg;
         };
         abstract void Execute();
-        abstract public boolean isUndoable();
+        public boolean isUndoable() {
+	    return undoable;
+        };
     }
 
     private class GoForward extends TurtleCommand {
         public GoForward(float distance) {
             super(distance);
+	    undoable = true;
         }
         void Execute() {
             Log.d(TAG, "GoForward.Execute");
@@ -48,43 +52,50 @@ public class Turtle {
             }
             Log.d(TAG, "new position: (" + position.getX() + "," + position.getY() + ")");
         }
-        public boolean isUndoable() { return true; }
     }
 
     private class TurnLeft extends TurtleCommand {
-        public TurnLeft(float angle) { super(angle); }
+        public TurnLeft(float angle) {
+	    super(angle);
+	    undoable = false;
+        }
         void Execute() {
             Log.d(TAG, "TurnLeft.Execute");
             dir -= arg;
             Log.d(TAG, "new angle: " + dir);
         }
-        public boolean isUndoable() { return false; }
     }
 
     private class TurnRight extends TurtleCommand {
-        public TurnRight(float angle) { super(angle); }
+        public TurnRight(float angle) {
+	    super(angle);
+	    undoable = false;
+        }
         void Execute() {
             Log.d(TAG, "TurnRight.Execute");
             dir += arg;
             Log.d(TAG, "new angle: " + dir);
         }
-        public boolean isUndoable() { return false; }
     }
 
     private class PenDown extends TurtleCommand {
-        public PenDown(float arg) { super(arg); }
+        public PenDown(float arg) {
+	    super(arg);
+	    undoable = false;
+        }
         void Execute() {
             penIsDown = true;
         }
-        public boolean isUndoable() { return false; }
     }
 
     private class PenUp extends TurtleCommand {
-        public PenUp(float arg) { super(arg); }
+        public PenUp(float arg) {
+	    super(arg);
+	    undoable = false;
+        }
         void Execute() {
             penIsDown = false;
         }
-        public boolean isUndoable() { return false; }
     }
 
     public Turtle(float dir) { // needed because the position will only be known later in DrawingView
