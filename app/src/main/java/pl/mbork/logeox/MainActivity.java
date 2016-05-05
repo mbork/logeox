@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_clear_screen:
                 Log.d(TAG, "Clear screen!");
-                drawingView.getTurtle().clearTurtlePaths();
+                drawingView.getTurtle().clearScreen();
                 drawingView.invalidate();
                 return true;
             case R.id.action_undo:

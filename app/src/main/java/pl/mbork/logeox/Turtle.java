@@ -98,6 +98,16 @@ public class Turtle {
         }
     }
 
+    private class ClearScreen extends TurtleCommand {
+        public ClearScreen(float arg) {
+            super(arg);
+            undoable = true;
+        }
+        void Execute() {
+            clearTurtlePaths();
+        }
+    }
+
     public Turtle(float dir) { // needed because the position will only be known later in DrawingView
         this(new TurtlePoint(0, 0), dir);
     }
@@ -183,7 +193,13 @@ public class Turtle {
         commands.addLast(cmd);
     }
 
-    public void clearTurtlePaths() {
+    public void clearScreen() {
+        TurtleCommand cmd = new ClearScreen(0);
+        cmd.Execute();
+        commands.addLast(cmd);
+    }
+
+    private void clearTurtlePaths() {
         paths.clear();
         currentPath = new TurtlePath();
         currentPath.moveTo(position);
