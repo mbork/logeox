@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class Turtle {
     private TurtlePoint startPosition, position;
-    private float dir; // 0 means right
+    private float startDir, dir; // 0 means right
     private Boolean penIsDown;
     private ArrayDeque<TurtleCommand> commands;
     private List<TurtlePath> paths;
@@ -94,6 +94,7 @@ public class Turtle {
     public Turtle(TurtlePoint startPosition, float dir) {
         this.startPosition = new TurtlePoint(startPosition);
         this.position = new TurtlePoint(startPosition);
+        this.startDir = dir;
         this.dir = dir;
         this.penIsDown = true;
         currentPath = new TurtlePath();
@@ -113,7 +114,7 @@ public class Turtle {
     public void goHome() {
         Log.d(TAG, "Going home: " + this.startPosition);
         this.setPosition(this.startPosition);
-        this.dir = -90; // TODO: magic constant!!!
+        this.dir = startDir;
     }
 
     public double getDir() {
