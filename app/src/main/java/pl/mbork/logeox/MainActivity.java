@@ -2,6 +2,7 @@ package pl.mbork.logeox;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         drawingView = (DrawingView)findViewById(R.id.drawing_view);
         penSwitch = (Switch)findViewById(R.id.pen_switch);
@@ -64,6 +68,11 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_undo:
                 Log.d(TAG, "Undo!");
                 drawingView.getTurtle().Undo();
+                drawingView.invalidate();
+                return true;
+            case R.id.action_home:
+                Log.d(TAG, "Home");
+                drawingView.getTurtle().goHome();
                 drawingView.invalidate();
                 return true;
             case R.id.action_settings:
