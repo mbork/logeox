@@ -52,6 +52,21 @@ public class DrawingView extends ImageView {
         return turtle;
     }
 
+    public void setTurtle(Turtle turtle) {
+        this.turtle = turtle;
+        final ImageView drawingView = this;
+        final Turtle fturtle = turtle;  // TODO: this is an ugly hack!!!
+        this.post(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        fturtle.setStartPosition(new TurtlePoint(drawingView.getWidth() / 2, drawingView.getHeight() / 2));
+                        fturtle.replayCommands();
+                    }
+                }
+        );
+    }
+
     private Boolean turtleOutOfBounds() {
         return ((turtle.getPosition().getX() < 0)
             || (turtle.getPosition().getX() > this.getWidth())
